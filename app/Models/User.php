@@ -9,4 +9,8 @@ class User extends Model
   protected $table="items";
   protected $fillable=["name","email","password"];
   protected $guarded=[];
+
+  public function trans(){
+    return $this->hasmany("Apps\Models\Transaction");
+  }
 }
