@@ -28,7 +28,6 @@ class userController extends Controller
         if(count($data)>0){
           return response()->json($data);
         }return response()->json(['error' => 'Nothing found'], 404);
-  }
 
     }
 
