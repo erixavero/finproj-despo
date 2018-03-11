@@ -11,6 +11,6 @@ class User extends Model
   protected $guarded=[];
 
   public function trans(){
-    return $this->hasmany("Apps\Models\Transaction");
+    return $this->hasMany("Apps\Models\Transaction");
   }
 }
