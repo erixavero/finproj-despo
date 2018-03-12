@@ -11,10 +11,10 @@ class Transaction extends Model
   protected $guarded=[];
 
   //declare relations to perhaps get item name and price
-  public function items(){
+  public function itemsrc(){
     return $this->belongsTo("App\Models\Item","item_id");
   }
-  public function customer(){
+  public function customersrc(){
     return $this->belongsTo("App\Models\User","customer_id");
   }
 }

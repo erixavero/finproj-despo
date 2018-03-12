@@ -52,7 +52,7 @@ class transController extends Controller
         //response()->json($data);
       }
       catch(QueryException $a){
-        return response()->json(["Error" => "not found"], 404);
+        return response()->json(["Error" => "it screwed up"], 404);
       }
     }
 
@@ -112,7 +112,7 @@ class transController extends Controller
         $data = $this->transaction->where("id",$id)->delete();
       }
       catch(QueryException $a){
-        return response()->json(["Error" => "not found"], 404);
+        return response()->json(["Error" => "screwed up"], 404);
       }
 
       if($data == 1){
@@ -122,4 +122,19 @@ class transController extends Controller
         return response()->json(["Error" => "not found"], 404);
       }
     }
+
+    public function printBill($cust_id, $item_id)
+    {
+      try {
+        $conditions = ['customer_id'=>$cust_id , 'item_id'=>$item_id];
+        $data = Transaction::with('customersrc','itemsrc')->where($conditions)->get();
+      } catch (QueryException $e) {
+        return response()->json(['error' => "it screwed up"], 404);
+      }
+
+      if(count($data)>0){
+        return response()->json($data);
+      }return response()->json(['error' => 'Nothing found'], 404);
+    }
+
 }
