@@ -44,15 +44,15 @@ class transController extends Controller
         "customer_id" => $request->customer_id,
         "item_id" => $request->item_id,
         "qty" => $request->qty,
-        "total_price" => $request->total_price
+        "total" => $request->total
       ];
 
       try{
         $data = $this->transaction->create($newStuff);
-        //response()->json($data);
+        return response()->json($data);
       }
       catch(QueryException $a){
-        return response()->json(["Error" => "it screwed up"], 404);
+        return response()->json(["Error" => $a], 404);
       }
     }
 
@@ -82,7 +82,7 @@ class transController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
       $newStuff = [
         "customer_id" => $request->customer_id,
@@ -123,7 +123,7 @@ class transController extends Controller
       }
     }
 
-    public function printBill($cust_id, $item_id)
+    public function subtotal($cust_id, $item_id)
     {
       try {
         $conditions = ['customer_id'=>$cust_id , 'item_id'=>$item_id];
@@ -137,4 +137,17 @@ class transController extends Controller
       }return response()->json(['error' => 'Nothing found'], 404);
     }
 
+    public function printBill($cust_id)
+    {
+      try {
+        $conditions = ['customer_id'=>$cust_id];
+        $data = Transaction::with('customersrc','itemsrc')->where($conditions)->get();
+      } catch (QueryException $e) {
+        return response()->json(['error' => "it screwed up"], 404);
+      }
+
+      if(count($data)>0){
+        return response()->json($data);
+      }return response()->json(['error' => 'Nothing found'], 404);
+    }
 }

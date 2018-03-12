@@ -26,7 +26,7 @@ Route::post("/additem","itemController@store");
 Route::post("/changeitem","itemController@update");
 Route::get("/delitem/{id}","itemController@destroy");
 
-Route::get("/getitem/bycat/{id}","itemController@itemByCat");
+Route::get("/itembycat/{id}","itemController@itemByCat");
 
 //categories
 Route::get("/getcats","catController@index");
@@ -42,4 +42,13 @@ Route::post("/addtrans","transController@store");
 Route::post("/changetrans","transController@update");
 Route::get("/deltrans/{id}","transController@destroy");
 
-Route::get("/bill/{cust_id}/{item_id}","transController@printBill");
+Route::get("/bill/{cust_id}/{item_id}","transController@subtotal");
+Route::get("/bill/{cust_id}","transController@printBill");
+
+
+//users
+Route::get("/getusers","userController@index");
+Route::get("/getuser/{id}","userController@show");
+Route::post("/adduser","userController@store");
+Route::post("/changeuser","userController@update");
+Route::get("/deluser/{id}","userController@destroy");

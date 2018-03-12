@@ -43,7 +43,8 @@ class catController extends Controller
       ];
 
       try{
-        $this->category->create($newStuff);
+        $data = $this->category->create($newStuff);
+        return response()->json($data);
       }
       catch(QueryException $a){
         return response()->json(["Error" => "something missing"], 404);
@@ -76,7 +77,7 @@ class catController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
       $newStuff = [
         "name" => $request->name

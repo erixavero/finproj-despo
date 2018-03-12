@@ -49,10 +49,10 @@ class itemController extends Controller
 
       try{
         $data = $this->item->create($newStuff);
-        //response()->json($data);
+        return response()->json($data);
       }
       catch(QueryException $a){
-        return response()->json(["Error" => "not found"], 404);
+        return response()->json(["Error" => "it screwed up"], 404);
       }
     }
 
@@ -82,7 +82,7 @@ class itemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
       $newStuff = [
         "category_id" => $request->category_id,
@@ -95,7 +95,7 @@ class itemController extends Controller
 
       try{
         $data = $this->item->where("id",$pt)->update($newStuff);
-        //response()->json($data);
+        return response()->json($data);
       }
       catch(QueryException $a){
         return response()->json(["Error" => "not found"], 404);
