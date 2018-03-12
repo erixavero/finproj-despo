@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Item;
-use App\Models\User;
+use App\User;
 use Illuminate\Database\QueryException;
 
 class transController extends Controller
