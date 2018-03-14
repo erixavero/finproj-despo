@@ -4,10 +4,20 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Uuid;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    public $incrementing = false;
+
+    protected static function boot()
+  {
+      parent::boot();
+      static::creating(function ($model) {
+          $model->id = (string)Uuid::generate();
+      });
+  }
 
     /**
      * The attributes that are mass assignable.

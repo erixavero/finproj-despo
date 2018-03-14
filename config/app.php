@@ -208,7 +208,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //'Uuid' => fzaninotto\faker\src\Faker\Provider\Uuid::class,
+        //'Uuid' => ramsey\uuid\src\Uuid::class,
+        //'Uuid' => Ramsey\Uuid\Uuid::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
     ],
 
 ];
