@@ -23,6 +23,6 @@ class Category extends Model
   protected $guarded=[];
 
   public function cats(){
-    return $this->hasMany("Apps\Model\Item");
+    return $this->hasMany("App\Models\Item");
   }
 }

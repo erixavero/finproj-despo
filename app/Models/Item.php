@@ -27,6 +27,6 @@ class Item extends Model
   }
 
   public function trans(){
-    return $this->hasMany("Apps\Models\Transaction");
+    return $this->hasMany("App\Models\Transaction");
   }
 }
