@@ -99,17 +99,24 @@ class itemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
+    public function update($id, Request $request)
+    {/*
+      $newStuff = [
+        "category_id" => $request->category_id,
+        "name" => $request->name,
+        "desc" => $request->desc,
+        "price" => $request->price,
+        "stock" => $request->stock
+      ];*/
+
       if(isset($request->category_id)) $newStuff ["category_id"] = $request->category_id;
       if(isset($request->name)) $newStuff["name"] = $request->name;
       if(isset($request->desc)) $newStuff["desc"] = $request->desc;
       if(isset($request->price)) $newStuff["price"] = $request->price;
       if(isset($request->stock)) $newStuff["stock"] = $request->stock;
 
-      $pt = $request->id;
+      $pt = $id;
 
-      return $newStuff;
       try{
         $data = $this->item->where("id",$pt)->update($newStuff);
         //return response()->json($data);

@@ -21,12 +21,14 @@ class catController extends Controller
     {
       try {
         $data = $this->category->get();
+        $array = Array();
+        $array['data'] = $data;
       } catch (QueryException $e) {
         return response()->json(['error' => "it screwed up"], 404);
       }
 
       if(count($data)>0){
-        return response()->json($data);
+        return response()->json($array);
       }return response()->json(['error' => 'Nothing found'], 404);
     }
 

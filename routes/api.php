@@ -40,7 +40,7 @@ Route::group([
     Route::get("/get","itemController@index");
     Route::get("/get/{id}","itemController@show");
     Route::post("/add","itemController@store");
-    Route::post("/change","itemController@update");
+    Route::post("/change/{id}","itemController@update");
     Route::delete("/del/{id}","itemController@destroy");
     Route::get("/search/{q}","itemController@search");
 
@@ -48,7 +48,7 @@ Route::group([
 });
 
 Route::group([
-  'prefix'=>'cats'
+  'prefix'=>'cat'
 ],function(){
     //categories
     Route::get("/get","catController@index");
