@@ -45,7 +45,7 @@ class catController extends Controller
       ];
 
       try{
-        $data = $this->category->create($newStuff);
+        $data['data'] = $this->category->create($newStuff);
         return response()->json($data);
       }
       catch(QueryException $a){
