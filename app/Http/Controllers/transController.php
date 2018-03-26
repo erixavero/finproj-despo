@@ -99,7 +99,7 @@ class transController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update($id,Request $request)
     {
       $newStuff = [
         "customer_id" => $request->customer_id,
@@ -109,7 +109,7 @@ class transController extends Controller
       ];
 
       try{
-        $data = $this->transaction->update($newStuff);
+        $data = $this->transaction->where('id',$id)->update($newStuff);
         //response()->json($data);
       }
       catch(QueryException $a){
