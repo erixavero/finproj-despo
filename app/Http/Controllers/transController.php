@@ -12,7 +12,7 @@ class transController extends Controller
 {
   public function __construct(Transaction $transaction){
     $this->transaction = $transaction;
-    //$this->middleware('auth:api', ['except' => ['index']]);
+    $this->middleware('auth:api', ['except' => ['index']]);
   }
 
     /**
@@ -57,7 +57,8 @@ class transController extends Controller
         foreach ($prc as $key => $value) {
           $p = $value["price"];
         }
-        $res = $request->qty * $p;
+        $res = $request->qty * $p; //count total price
+        $left = $s-$request->qty; //count leftover stock
 
         $newStuff = [
           "bill_id" => $request->bill_id,
@@ -67,6 +68,7 @@ class transController extends Controller
         ];
 
         $data['data'] = $this->transaction->create($newStuff);
+        Item::where('id',$request->item_id)->update(array('stock' => $left));
         return response()->json($data);
       }
       catch(QueryException $a){
@@ -108,6 +110,9 @@ class transController extends Controller
         "qty" => $request->qty,
         "total_price" => $request->total_price
       ];
+      if ($request->header('admin') != "true") {
+        return response()->json(["Error" => "not worthy"], 401);
+      }
 
       try{
         $data = $this->transaction->where('id',$id)->update($newStuff);
@@ -147,7 +152,7 @@ class transController extends Controller
         $conditions = ['customer_id'=>$cust_id , 'item_id'=>$item_id];
         $data['data'] = Transaction::with('customersrc','itemsrc')->where($conditions)->get();
       } catch (QueryException $e) {
-        return response()->json(['error' => "it screwed up"], 404);
+        return response()->json(['error' => $e], 404);
       }
 
       if(count($data)>0){
@@ -155,13 +160,13 @@ class transController extends Controller
       }return response()->json(['error' => 'Nothing found'], 404);
     }
 
-    public function printBill($bill_id)
+    public function printBill($cust_id)
     {
       try {
-        $conditions = ['bill_id'=>$bill_id];
-        $data['data'] = Transaction::with('billsrc','itemsrc')->where($conditions)->get();
+        $conditions = ['customer_id'=>$cust_id];
+        $data['data'] = Transaction::with('customersrc','itemsrc')->where($conditions)->get();
       } catch (QueryException $e) {
-        return response()->json(['error' => "it screwed up"], 404);
+        return response()->json(['error' => $e], 404);
       }
 
       if(count($data)>0){

@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     /**
@@ -95,7 +95,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone_num' => $data['phone_num'],
-            'address' => $data['address']
+            'address' => $data['address'],
+            'admin' => false
         ]);
 
         return response()->json($arr);
