@@ -57,7 +57,7 @@ Route::group([
     Route::post("/change/{id}","catController@update");
     Route::delete("/del/{id}","catController@destroy");
 });
-
+/*
 Route::group([
   'prefix'=>'bill'
 ],function(){
@@ -68,7 +68,7 @@ Route::group([
   Route::delete("/del/{id}","billController@destroy");
 
   Route::get("/get/{id}","billController@print");
-});
+});*/
 
 Route::group([
   'prefix'=>'trans'

@@ -12,7 +12,7 @@ class transController extends Controller
 {
   public function __construct(Transaction $transaction){
     $this->transaction = $transaction;
-    $this->middleware('auth:api', ['except' => ['index']]);
+    $this->middleware('auth:api');
   }
 
     /**
@@ -61,7 +61,7 @@ class transController extends Controller
         $left = $s-$request->qty; //count leftover stock
 
         $newStuff = [
-          "bill_id" => $request->bill_id,
+          "customer_id" => $request->customer_id,
           "item_id" => $request->item_id,
           "qty" => $request->qty,
           "total" => $res
@@ -105,7 +105,7 @@ class transController extends Controller
     public function update($id,Request $request)
     {
       $newStuff = [
-        "bill_id" => $request->bill_id,
+        "customer_id" => $request->customer_id,
         "item_id" => $request->item_id,
         "qty" => $request->qty,
         "total_price" => $request->total_price

@@ -11,7 +11,7 @@ class itemController extends Controller
 {
     public function __construct(Item $item){
       $this->item = $item;
-      $this->middleware('auth:api', ['except' => ['index']]);
+      $this->middleware('auth:api', ['except' => ['index','show','itemByCat']]);
     }
 
     /**

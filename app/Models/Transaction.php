@@ -18,7 +18,7 @@ class Transaction extends Model
   }
 
   protected $table="transactions";
-  protected $fillable=["bill_id","item_id","qty","total"];
+  protected $fillable=["customer_id","item_id","qty","total"];
   protected $guarded=[];
 
   //declare relations to perhaps get item name and price
