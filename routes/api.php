@@ -81,5 +81,5 @@ Route::post("/change/{id}","transController@update");
 Route::delete("/del/{id}","transController@destroy");
 
 //Route::get("/bill/{cust_id}/{item_id}","transController@subtotal");
-Route::get("/bill/{bill_id}","transController@printBill");
+Route::get("/bill/{cust_id}","transController@printBill");
 });

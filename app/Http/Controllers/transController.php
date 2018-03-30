@@ -61,7 +61,7 @@ class transController extends Controller
         $left = $s-$request->qty; //count leftover stock
 
         $newStuff = [
-          "customer_id" => $request->customer_id,
+          "customer_id" => $request->header('cust_id'),
           "item_id" => $request->item_id,
           "qty" => $request->qty,
           "total" => $res
